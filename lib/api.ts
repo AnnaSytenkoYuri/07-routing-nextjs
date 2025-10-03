@@ -15,21 +15,29 @@ interface CreateNoteDto {
   tag: string;
 }
 
-export async function fetchNotes(
+interface FetchNotesParams {
+  tag?: string | null;
+  page?: number;
+  perPage?: number;
+  search?: string;
+}
+
+export async function fetchNotes({
+  tag,
   page = 1,
   perPage = 12,
-  search = ""
-): Promise<FetchNotesResponse> {
-  const response = await axios.get<FetchNotesResponse>(
+  search = "",
+}: FetchNotesParams): Promise<FetchNotesResponse> {
+  const { data } = await axios.get<FetchNotesResponse>(
     "https://notehub-public.goit.study/api/notes",
     {
-      params: { page, perPage, search },
+      params: { page, perPage, search, tag },
       headers: {
         Authorization: `Bearer ${myToken}`,
       },
     }
   );
-  return response.data;
+  return data;
 }
 
 export async function createNote(noteData: CreateNoteDto): Promise<Note> {
@@ -69,3 +77,15 @@ export async function fetchNoteById(id: string): Promise<Note> {
   );
   return response.data;
 }
+
+// export async function getTags(): Promise<string[]> {
+//   const { data } = await axios.get<Tags[]>(
+//     "https://notehub-public.goit.study/api/notes/tag",
+//     {
+//       headers: {
+//         Authorization: `Bearer ${myToken}`,
+//       },
+//     }
+//   );
+//   return data[0].tags;
+// }

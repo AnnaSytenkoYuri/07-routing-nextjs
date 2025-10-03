@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import css from "./NoteDetails.module.css";
 import { fetchNoteById } from "@/lib/api";
 import LoadingIndicator from "../../loading";
-import ErrorMessage from "../error";
+import ErrorMessage from "../filter/[...slug]/error";
 import { useParams } from "next/navigation";
 
 

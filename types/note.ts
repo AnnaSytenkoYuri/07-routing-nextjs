@@ -6,3 +6,8 @@ export interface Note {
   updatedAt: string;
   tag: string;
 }
+
+
+export interface Tags{
+  tags: string[];
+}
