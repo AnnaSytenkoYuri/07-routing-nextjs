@@ -18,12 +18,13 @@ interface CreateNoteDto {
 export async function fetchNotes(
   page = 1,
   perPage = 12,
-  search = ""
+  search = "",
+  tag?:string,
 ): Promise<FetchNotesResponse> {
   const response = await axios.get<FetchNotesResponse>(
     "https://notehub-public.goit.study/api/notes",
     {
-      params: { page, perPage, search },
+      params: { page, perPage, search, tag },
       headers: {
         Authorization: `Bearer ${myToken}`,
       },

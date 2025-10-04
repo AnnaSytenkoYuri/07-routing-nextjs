@@ -2,10 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import LoadingIndicator from "@/app/loading";
 import ErrorMessage from "@/app/notes/[id]/error";
-import { useRouter } from "next/router";
+
 import css from "./NotePreview.module.css";
 import Modal from "@/components/Modal/Modal";
 

@@ -40,11 +40,13 @@ import LoadingIndicator from "@/app/loading";
 interface NoteClientProps {
   noteClientPage: number;
   noteClientSearch: string;
+  noteClientTag?: string;
 }
 
 export default function NotesClient({
   noteClientPage,
   noteClientSearch,
+  noteClientTag,
 }: NoteClientProps) {
   const [page, setPage] = useState(noteClientPage);
   const [perPage] = useState(12);
@@ -57,8 +59,8 @@ export default function NotesClient({
   }, [debouncedSearchTerm]);
 
   const { data, isLoading, isError, error } = useQuery<FetchNotesResponse>({
-    queryKey: ["notes", page, perPage, debouncedSearchTerm],
-    queryFn: () => fetchNotes(page, perPage, debouncedSearchTerm),
+    queryKey: ["notes", page, perPage, debouncedSearchTerm, noteClientTag],
+    queryFn: () => fetchNotes(page, perPage, debouncedSearchTerm, noteClientTag,),
     placeholderData: keepPreviousData,
   });
 
