@@ -1,19 +1,3 @@
-// import { fetchNotes } from "@/lib/api";
-// import NotesClient from "./Notes.client";
-
-
-
-// export default async function FilterNotesPage({ params }: PageProps) {
- 
-//   const notes = await fetchNotes({tag})
-
-//   return (
-//     <div>
-//    <NotesClient notes={notes.notes} tag={rawTag ?? null}/>
-//     </div>
-//   );
-// }
-
 import { fetchNotes } from "@/lib/api";
 import {
   dehydrate,
@@ -23,10 +7,10 @@ import {
 import NotesClient from "./Notes.client";
 
 interface PageProps {
-  params: Promise<{ slug: string[] }>
+  params: Promise<{ slug: string[] }>;
 }
 
-export default async function NotesPage({params}: PageProps) {
+export default async function NotesPage({ params }: PageProps) {
   const rawTag = (await params).slug?.[0] ?? "all";
   const tag = rawTag === "all" ? undefined : rawTag;
 
@@ -43,7 +27,11 @@ export default async function NotesPage({params}: PageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient noteClientPage={page} noteClientSearch={search} noteClientTag={tag}/>
+      <NotesClient
+        noteClientPage={page}
+        noteClientSearch={search}
+        noteClientTag={tag}
+      />
     </HydrationBoundary>
   );
 }
