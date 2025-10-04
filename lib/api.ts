@@ -15,30 +15,45 @@ interface CreateNoteDto {
   tag: string;
 }
 
-interface FetchNotesParams {
-  tag?: string | null;
-  page?: number;
-  perPage?: number;
-  search?: string;
-}
-
-export async function fetchNotes({
-  tag,
+export async function fetchNotes(
   page = 1,
   perPage = 12,
-  search = "",
-}: FetchNotesParams): Promise<FetchNotesResponse> {
-  const { data } = await axios.get<FetchNotesResponse>(
+  search = ""
+): Promise<FetchNotesResponse> {
+  const response = await axios.get<FetchNotesResponse>(
     "https://notehub-public.goit.study/api/notes",
     {
-      params: { page, perPage, search, tag },
+      params: { page, perPage, search },
       headers: {
         Authorization: `Bearer ${myToken}`,
       },
     }
   );
-  return data;
+  return response.data;
 }
+
+
+// interface FetchNotesParams {
+//   tag?: string | null;
+//   page?: number;
+//   perPage?: number;
+//   search?: string;
+// }
+
+// export async function fetchNotes(page: number, perPage: number, search: string, {
+//   tag, page = 1, perPage = 12, search = "",
+// }: FetchNotesParams): Promise<FetchNotesResponse> {
+//   const { data } = await axios.get<FetchNotesResponse>(
+//     "https://notehub-public.goit.study/api/notes",
+//     {
+//       params: { page, perPage, search, tag },
+//       headers: {
+//         Authorization: `Bearer ${myToken}`,
+//       },
+//     }
+//   );
+//   return data;
+// }
 
 export async function createNote(noteData: CreateNoteDto): Promise<Note> {
   const response = await axios.post<Note>(

@@ -7,9 +7,9 @@ interface Props {
 export default function NotesLayout({ children, sidebar, modal }: Props) {
   return (
     <div>
+      {modal}
       <aside>{sidebar}</aside>
       <div>{children}</div>
-      {modal}
     </div>
   );
 }
