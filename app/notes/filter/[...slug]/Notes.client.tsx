@@ -1,26 +1,3 @@
-// import { Note } from "@/types/note";
-// import Link from "next/link";
-
-// interface NotesProps {
-//   tag: string | null;
-//   notes: Note[];
-// }
-
-// export default function NotesClient({ tag, notes }: NotesProps) {
-//   return (
-//     <div>
-//       <h1>{tag ? `Notes tagged "${tag}"` : "All Notes"}</h1>
-//       <ul>
-//         {notes.map((note) => (
-//           <li key={note.id}>
-//             <Link href={`/notes/${note.id}`}>{note.title}</Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import css from "./NotesPage.module.css";
@@ -38,20 +15,16 @@ import ErrorMessage from "./error";
 import LoadingIndicator from "@/app/loading";
 
 interface NoteClientProps {
-  noteClientPage: number;
-  noteClientSearch: string;
   noteClientTag?: string;
 }
 
 export default function NotesClient({
-  noteClientPage,
-  noteClientSearch,
   noteClientTag,
 }: NoteClientProps) {
-  const [page, setPage] = useState(noteClientPage);
+  const [page, setPage] = useState(1);
   const [perPage] = useState(12);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(noteClientSearch);
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
 
   useEffect(() => {

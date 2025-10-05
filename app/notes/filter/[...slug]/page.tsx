@@ -11,8 +11,8 @@ interface PageProps {
 }
 
 export default async function NotesPage({ params }: PageProps) {
-  const rawTag = (await params).slug?.[0] ?? "all";
-  const tag = rawTag === "all" ? undefined : rawTag;
+  const rawTag = (await params).slug?.[0] ?? "All";
+  const tag = rawTag === "All" ? undefined : rawTag;
 
   const queryClient = new QueryClient();
 
@@ -28,8 +28,6 @@ export default async function NotesPage({ params }: PageProps) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NotesClient
-        noteClientPage={page}
-        noteClientSearch={search}
         noteClientTag={tag}
       />
     </HydrationBoundary>
