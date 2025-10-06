@@ -19,7 +19,7 @@ export default async function NotePreviewPage({ params }: Props) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotePreview noteId={id}/>;
+      <NotePreview noteId={id} />
     </HydrationBoundary>
   );
 }
